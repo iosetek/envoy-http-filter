@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package authorization;
+
+import "validate/validate.proto";
+
+message Config {
+    string user_header = 1 [(validate.rules).string.min_bytes = 1];
+}

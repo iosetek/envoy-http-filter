@@ -3,14 +3,14 @@
 
 namespace Envoy::Http {
 
-AuthorizationCallbacks::AuthorizationCallbacks(
-  std::function<void()> authorize,
-  std::function<void()> unauthorize
-) : authorize_(authorize), unauthorize_(unauthorize) {}
+AuthorizationCallbacks::AuthorizationCallbacks(std::function<void()> authorize,
+                                               std::function<void()> unauthorize)
+    : authorize_(authorize), unauthorize_(unauthorize) {}
 
 AuthorizationCallbacks::~AuthorizationCallbacks() {}
 
-void AuthorizationCallbacks::onSuccess(const Http::AsyncClient::Request&, Http::ResponseMessagePtr&& response) {
+void AuthorizationCallbacks::onSuccess(const Http::AsyncClient::Request&,
+                                       Http::ResponseMessagePtr&& response) {
   if (response == nullptr) {
     ENVOY_LOG(error, "Could not obtain response object from authorization call");
     unauthorize_();
@@ -32,10 +32,12 @@ void AuthorizationCallbacks::onSuccess(const Http::AsyncClient::Request&, Http::
   authorize_();
 }
 
-void AuthorizationCallbacks::onFailure(const Http::AsyncClient::Request&, Http::AsyncClient::FailureReason reason) {
+void AuthorizationCallbacks::onFailure(const Http::AsyncClient::Request&,
+                                       Http::AsyncClient::FailureReason reason) {
   ENVOY_LOG(error, "Failed to call authorization service: {}", int(reason));
   unauthorize_();
 }
 
-void AuthorizationCallbacks::onBeforeFinalizeUpstreamSpan(Envoy::Tracing::Span&, const Http::ResponseHeaderMap*) {}
-}
+void AuthorizationCallbacks::onBeforeFinalizeUpstreamSpan(Envoy::Tracing::Span&,
+                                                          const Http::ResponseHeaderMap*) {}
+} // namespace Envoy::Http

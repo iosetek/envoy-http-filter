@@ -25,8 +25,7 @@ INSTANTIATE_TEST_SUITE_P(IpVersions, HttpFilterSampleIntegrationTest,
 TEST_P(HttpFilterSampleIntegrationTest, Test1) {
   Http::TestRequestHeaderMapImpl headers{
       {":method", "GET"}, {":path", "/"}, {":authority", "host"}};
-  Http::TestRequestHeaderMapImpl response_headers{
-      {":status", "200"}};
+  Http::TestRequestHeaderMapImpl response_headers{{":status", "200"}};
 
   IntegrationCodecClientPtr codec_client;
   FakeHttpConnectionPtr fake_upstream_connection;

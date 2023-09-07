@@ -1,4 +1,4 @@
-workspace(name = "envoy_filter_example")
+workspace(name = "envoy_http_filter")
 
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
 

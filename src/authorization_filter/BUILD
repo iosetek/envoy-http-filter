@@ -37,12 +37,7 @@ envoy_cc_library(
         ":cache",
         ":pkg_cc_proto",
         "@envoy//envoy/server:factory_context_interface",
-        "@envoy//envoy/http:async_client_interface",
-        "@envoy//source/common/network:address_lib",
-        "@envoy//envoy/server:filter_config_interface",
-        "@envoy//envoy/upstream:cluster_manager_interface",
-        "@envoy//source/common/http:message_lib",
-        "@envoy//source/common/http:headers_lib",
+        "@envoy//envoy/http:header_map_interface",
     ],
 )
 
@@ -66,7 +61,6 @@ envoy_cc_library(
     deps = [
         ":headers",
         "@envoy//envoy/http:async_client_interface",
-        "@envoy//source/common/network:address_lib",
     ],
 )
 

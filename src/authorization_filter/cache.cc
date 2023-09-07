@@ -15,7 +15,8 @@ absl::optional<bool> AuthorizationCacheTLS::isAuthorized(const std::string& user
 }
 
 void AuthorizationCacheTLS::addUserEntry(const std::string& user, bool authorized) {
-  ENVOY_LOG(trace, "Adding user '{}' to cache storage with authorization status: {}", user, authorized);
+  ENVOY_LOG(trace, "Adding user '{}' to cache storage with authorization status: {}", user,
+            authorized);
   authorized_users_[user] = authorized;
 }
 

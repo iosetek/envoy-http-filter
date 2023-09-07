@@ -18,7 +18,7 @@ public:
                                                      const std::string& stat_prefix,
                                                      FactoryContext& context) override {
     auto casted = Envoy::MessageUtil::downcastAndValidate<const authorization::Config&>(
-                                proto_config, context.messageValidationVisitor());
+        proto_config, context.messageValidationVisitor());
 
     Http::AuthorizationFilterConfigSharedPtr config =
         std::make_shared<Http::AuthorizationFilterConfig>(
@@ -27,14 +27,10 @@ public:
     auto& cacheHitsStats = context.scope().counterFromString(stat_prefix + "total_cache_hits");
     auto& cacheMissesStats = context.scope().counterFromString(stat_prefix + "total_cache_misses");
 
-    return [config, &context, &cacheHitsStats, &cacheMissesStats](Http::FilterChainFactoryCallbacks& callbacks) -> void {
-
-      auto filter = new Http::AuthorizationFilter(
-        config,
-        context.clusterManager(),
-        cacheHitsStats,
-        cacheMissesStats
-      );
+    return [config, &context, &cacheHitsStats,
+            &cacheMissesStats](Http::FilterChainFactoryCallbacks& callbacks) -> void {
+      auto filter = new Http::AuthorizationFilter(config, context.clusterManager(), cacheHitsStats,
+                                                  cacheMissesStats);
       callbacks.addStreamDecoderFilter(Http::StreamDecoderFilterSharedPtr{filter});
     };
   }

@@ -13,8 +13,7 @@
 #include "authorization_callbacks.h"
 #include "src/authorization_filter/config.pb.h"
 
-namespace Envoy {
-namespace Http {
+namespace Envoy::Http {
 
 // TODO: Add access logs
 // TODO: Add tests
@@ -22,11 +21,9 @@ namespace Http {
 
 class AuthorizationFilter : public StreamDecoderFilter, Logger::Loggable<Logger::Id::filter> {
 public:
-  AuthorizationFilter(
-    AuthorizationFilterConfigSharedPtr config,
-    Upstream::ClusterManager& cluster_manager,
-    Stats::Counter& cache_hits,
-    Stats::Counter& cache_misses);
+  AuthorizationFilter(AuthorizationFilterConfigSharedPtr config,
+                      Upstream::ClusterManager& cluster_manager, Stats::Counter& cache_hits,
+                      Stats::Counter& cache_misses);
   ~AuthorizationFilter();
 
   FilterHeadersStatus decodeHeaders(RequestHeaderMap&, bool) override;
@@ -55,5 +52,4 @@ private:
   StreamDecoderFilterCallbacks* decoder_callbacks_;
 };
 
-} // namespace Http
-} // namespace Envoy
+} // namespace Envoy::Http

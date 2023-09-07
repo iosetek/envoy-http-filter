@@ -10,7 +10,8 @@
 namespace Envoy {
 namespace Http {
 
-struct AuthorizationCacheTLS : public ThreadLocal::ThreadLocalObject, Logger::Loggable<Logger::Id::filter> {
+struct AuthorizationCacheTLS : public ThreadLocal::ThreadLocalObject,
+                               Logger::Loggable<Logger::Id::filter> {
   absl::optional<bool> isAuthorized(const std::string& user);
 
   void addUserEntry(const std::string& user, bool authorized);
